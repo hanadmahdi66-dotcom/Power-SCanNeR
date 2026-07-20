@@ -2,6 +2,20 @@ import os
 import subprocess
 from datetime import datetime
 
+BANNER = r"""
+██╗  ██╗ █████╗ ███╗   ██╗ ██████╗ ███████╗
+██║  ██║██╔══██╗████╗  ██║██╔═══██╗██╔════╝
+███████║███████║██╔██╗ ██║██║   ██║███████╗
+██╔══██║██╔══██║██║╚██╗██║██║   ██║╚════██║
+██║  ██║██║  ██║██║ ╚████║╚██████╔╝███████║
+╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝
+
+        POWER SCANNER - V1.0
+        Author : hanad
+        Codename : hanDeep
+"""
+
+
 def shot(ip):
     # Isticmaal folder-ka RECOND (wuu abuuraa haddii uusan jirin)
     log_dir = "RECOND"
@@ -22,7 +36,6 @@ def shot(ip):
         "-oN", normal_log,
         "-oX", xml_log
     ]
-
     result = subprocess.run(nmap_cmd, capture_output=True, text=True)
 
     # Muuji natiijada shaashadda
@@ -36,7 +49,6 @@ def shot(ip):
     # dirb - directory/file brute-forcing on the target (fadlan hubi in dirb la install gareeyay: apt install dirb)
     print(f"[*] Running dirb on {ip} ... fadlan sug.")
     dirb_cmd = ["dirb", f"http://{ip}", "-o", dirb_log]
-
     dirb_result = subprocess.run(dirb_cmd, capture_output=True, text=True)
 
     print(dirb_result.stdout)
@@ -45,6 +57,8 @@ def shot(ip):
 
     print(f"[+] Dirb log waxaa lagu keydiyay: {dirb_log}")
 
+
 if __name__ == "__main__":
+    print(BANNER)
     target = input("Enter Target To Scan: ").strip()
     shot(target)
